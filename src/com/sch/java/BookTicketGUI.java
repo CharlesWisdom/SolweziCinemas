@@ -30,6 +30,8 @@ public class BookTicketGUI extends JFrame  implements ActionListener {
 	private static JLabel lblRowNumber;
 	private static JLabel lblColLetter;
 	
+	//new JTextField[63];
+	
 	private static JTextField txt0A;
 	private static JTextField txt0B;
 	private static JTextField txt0C;
@@ -101,6 +103,16 @@ public class BookTicketGUI extends JFrame  implements ActionListener {
 	private static JTextField txt10E;
 	private static JTextField txt10F;
 	private static JTextField txt10G;
+	
+	private static JTextField txtBoxes[] = {txt0A,txt0B,txt0C,txt0D,txt0E,txt0F,txt0G,
+			txt1A,txt1B,txt1C,txt1D,txt1E,txt1F,txt1G,
+			txt2A,txt2B,txt2C,txt2D,txt2E,txt2F,txt2G,
+			txt4A,txt4B,txt4C,txt4D,txt4E,txt4F,txt4G,
+			txt5A,txt5B,txt5C,txt5D,txt5E,txt5F,txt5G,
+			txt6A,txt6B,txt6C,txt6D,txt6E,txt6F,txt6G,
+			txt8A,txt8B,txt8C,txt8D,txt8E,txt8F,txt8G,
+			txt9A,txt9B,txt9C,txt9D,txt9E,txt9F,txt9G,
+			txt10A,txt10B,txt10C,txt10D,txt10E,txt10F,txt10G};
 	
 	public BookTicketGUI() {
 		
@@ -773,7 +785,88 @@ public class BookTicketGUI extends JFrame  implements ActionListener {
 			txt10G.setBounds(275, 266, 24, 20);
 			pnlCinemaDisplay.add(txt10G);
 			
+		/*	txtBoxes[0] = txt0A;
+			txtBoxes[1] = txt0B;
+			txtBoxes[2] = txt0C;
+			txtBoxes[3] = txt0D;
+			txtBoxes[4] = txt0E;
+			txtBoxes[5] = txt0F;
+			txtBoxes[6] = txt0G;
 			
+			txtBoxes[7] = txt1A;
+			txtBoxes[8] = txt1B;
+			txtBoxes[9] = txt1C;
+			txtBoxes[10] = txt1D;
+			txtBoxes[11] = txt1E;
+			txtBoxes[12] = txt1F;
+			txtBoxes[13] = txt1G;
+			
+			txtBoxes[14] = txt2A;
+			txtBoxes[15] = txt2B;
+			txtBoxes[16] = txt2C;
+			txtBoxes[17] = txt2D;
+			txtBoxes[18] = txt2E;
+			txtBoxes[19] = txt2F;
+			txtBoxes[20] = txt2G;
+			
+			txtBoxes[21] = txt4A;
+			txtBoxes[22] = txt4B;
+			txtBoxes[23] = txt4C;
+			txtBoxes[24] = txt4D;
+			txtBoxes[25] = txt4E;
+			txtBoxes[26] = txt4F;
+			txtBoxes[27] = txt4G;
+			
+			txtBoxes[28] = txt5A;
+			txtBoxes[29] = txt5B;
+			txtBoxes[30] = txt5C;
+			txtBoxes[31] = txt5D;
+			txtBoxes[32] = txt5E;
+			txtBoxes[33] = txt5F;
+			txtBoxes[34] = txt5G;
+			
+			txtBoxes[35] = txt6A;
+			txtBoxes[36] = txt6B;
+			txtBoxes[37] = txt6C;
+			txtBoxes[38] = txt6D;
+			txtBoxes[39] = txt6E;
+			txtBoxes[40] = txt6F;
+			txtBoxes[41] = txt6G;
+			
+			txtBoxes[42] = txt8A;
+			txtBoxes[43] = txt8B;
+			txtBoxes[44] = txt8C;
+			txtBoxes[45] = txt8D;
+			txtBoxes[46] = txt8E;
+			txtBoxes[47] = txt8F;
+			txtBoxes[48] = txt8G;
+			
+			txtBoxes[49] = txt9A;
+			txtBoxes[50] = txt9B;
+			txtBoxes[51] = txt9C;
+			txtBoxes[52] = txt9D;
+			txtBoxes[53] = txt9E;
+			txtBoxes[54] = txt9F;
+			txtBoxes[55] = txt9G;
+			
+			txtBoxes[56] = txt10A;
+			txtBoxes[57] = txt10B;
+			txtBoxes[58] = txt10C;
+			txtBoxes[59] = txt10D;
+			txtBoxes[60] = txt10E;
+			txtBoxes[61] = txt10F;
+			txtBoxes[62] = txt10G;*/
+			
+		/*
+		 * TicketBean ticketBean = new TicketBean();
+		 * 
+		 * for(int i = 0; i < ticketBean.mTickets.size(); i++) { for(int j = 0; j <
+		 * txtBoxes.length; j++) { if(ticketBean.mTickets.get(i).getIsBooked() == 1) {
+		 * String txtName = "txt" + ticketBean.mTickets.get(i).getRowNumber() +
+		 * ticketBean.mTickets.get(i).getColumnLetter();
+		 * if(txtBoxes[j].getName().contains(txtName)) {
+		 * txtBoxes[j].setBackground(Color.RED); } } } }
+		 */
 			
 			
 			fDisplay.add(contentPane);
@@ -785,18 +878,25 @@ public class BookTicketGUI extends JFrame  implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String s = e.getActionCommand();
 		TicketBean ticketBean = new TicketBean();
-		// String txt = "txt" + txtRowNumber.getText().toString() + txtColLetter.getText().toString();
-		for(int i = 0; i < ticketBean.mTickets.size(); i++) {
-			if(ticketBean.mTickets.get(i).getIsBooked() == 1) {
-				if(txt0A.getName() == "txt"+ ticketBean.mTickets.get(i).getRowNumber() +  ticketBean.mTickets.get(i).getColumnLetter()) {
-					
-				}
-			}
-		}
+
+		/*
+		 * for(int i = 0; i < ticketBean.mTickets.size(); i++) { for(int j = 0; j <
+		 * txtBoxes.length; j++) { if(ticketBean.mTickets.get(i).getIsBooked() == 1) {
+		 * String txtName = "txt" + ticketBean.mTickets.get(i).getRowNumber() +
+		 * ticketBean.mTickets.get(i).getColumnLetter();
+		 * if(txtBoxes[j].getName().contains(txtName)) {
+		 * txtBoxes[j].setBackground(Color.RED); } } } }
+		 */
 		
 		if(s.contains("Book Seat")) {			
 			Ticket pTicket = new Ticket(txtRowNumber.getText().toString(),txtColLetter.getText().toString(),1);
 			if(ticketBean.createBooking(pTicket)) {
+				for(int j = 0; j < txtBoxes.length; j++) {
+					String txtName = "txt" + txtRowNumber.getText().toString() + txtColLetter.getText().toString();
+					if(txtBoxes[j].getName().contains(txtName)) {
+						txtBoxes[j].setBackground(Color.RED);
+					}
+				}
 				System.console().readLine("Seat booked successfully.");
 			}else {
 				System.console().readLine("Error with booking seat.");
@@ -805,6 +905,12 @@ public class BookTicketGUI extends JFrame  implements ActionListener {
 			Ticket pTicket = ticketBean.getBooking(txtRowNumber.getText().toString(),txtColLetter.getText().toString());
 			if(pTicket.getIsBooked() == 1) {
 				if(ticketBean.delete(pTicket.getTicketID())) {
+					for(int j = 0; j < txtBoxes.length; j++) {
+						String txtName = "txt" + txtRowNumber.getText().toString() + txtColLetter.getText().toString();
+						if(txtBoxes[j].getName().contains(txtName)) {
+							txtBoxes[j].setBackground(Color.GREEN);
+						}
+					}
 					System.console().readLine("Booking deleted successfully.");
 				}else {
 					System.console().readLine("Error with deleting booking.");

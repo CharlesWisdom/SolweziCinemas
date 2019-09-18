@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,40 +23,50 @@ public class TicketBean {
 	   static final String DB_URL = "jdbc:mysql://localhost:3306/ticketdatabase";
 	   static final String DB_USER = "root";
 	   static final String DB_PASS = "Temwan!25";
-	   public List<Ticket> mTickets;
+	   public List<Ticket> mTickets = new ArrayList<Ticket>();
 	  // private JdbcRowSet rowSet = null;
 	   
 	   public TicketBean() {
-		   try(Connection con = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS)) {
-		        String sqlQuery = "SELECT * FROM ticketdatabase.t_reservation";
-		        Statement statement = con.createStatement();
-		        ResultSet result = statement.executeQuery(sqlQuery);
-		        
-		        while(result.next()) {
-		        	Ticket pTicket = new Ticket(result.getInt(0),result.getString(1),result.getString(2),result.getInt(3));
-		        	mTickets.add(pTicket);
-		        }
-		   } catch (SQLException ex) {
-		         
-		         ex.printStackTrace();
-		      }  
+
+			   try(Connection con = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS)) {
+			        String sqlQuery = "SELECT * FROM ticketdatabase.t_reservation";
+			        Statement statement = con.createStatement();
+			        ResultSet result = statement.executeQuery(sqlQuery);
+			        
+			        while(result.next()) {
+			        	Ticket pTicket = new Ticket(result.getInt("TicketID"),String.valueOf(result.getInt("RowNumber")),result.getString("ColumnLetter"),result.getInt("isBooked"));
+			        	mTickets.add(pTicket);
+			        }
+			   } catch (SQLException ex) {
+			         
+			         ex.printStackTrace();
+			      } 
+
+ 
 	   }
 	   
 	   public Ticket getBooking(String pRowNumer, String pColumnLetter) {
 		   Ticket pTicket = null;
-		   try(Connection con = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS)) {
-		        String sqlQuery = "SELECT * FROM ticketdatabase.t_reservation WHERE RowNumber = ?, ColumnLetter = ?";
-		        Statement statement = con.createStatement();
-		        ResultSet result = statement.executeQuery(sqlQuery);
-		        
-		        while(result.next()) {
-		        	pTicket = new Ticket(result.getInt(0),result.getString(1),result.getString(2),result.getInt(3));
-		        	mTickets.add(pTicket);
-		        }
-		   } catch (SQLException ex) {
-		         
-		         ex.printStackTrace();
-		      }  
+			try {
+				Class.forName("com.msql.jdbc.Driver");
+				   try(Connection con = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS)) {
+				        String sqlQuery = "SELECT * FROM ticketdatabase.t_reservation WHERE RowNumber = ?, ColumnLetter = ?";
+				        Statement statement = con.createStatement();
+				        ResultSet result = statement.executeQuery(sqlQuery);
+				        
+				        while(result.next()) {
+				        	pTicket = new Ticket(result.getInt(0),String.valueOf(result.getInt(1)),result.getString(2),result.getInt(3));
+				        	mTickets.add(pTicket);
+				        }
+				   } catch (SQLException ex) {
+				         
+				         ex.printStackTrace();
+				      } 
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+ 
 		   
 		   return pTicket;
 	   }
@@ -65,7 +76,7 @@ public class TicketBean {
 		        String sqlQuery = "INSERT INTO ticketdatabase.t_reservation (RowNumber,ColumnLetter,isBooked) VALUES (?,?,?)";
 		       
 		        PreparedStatement statement = con.prepareStatement(sqlQuery);
-		        statement.setString(1, pTicket.getRowNumber());
+		        statement.setInt(1, Integer.parseInt(pTicket.getRowNumber()));
 		        statement.setString(2, pTicket.getColumnLetter());
 		        statement.setInt(3, pTicket.getIsBooked());
 		        
