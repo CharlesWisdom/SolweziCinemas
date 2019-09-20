@@ -104,15 +104,6 @@ public class BookTicketGUI extends JFrame  implements ActionListener {
 	private static JTextField txt10F;
 	private static JTextField txt10G;
 	
-	private static JTextField txtBoxes[] = {txt0A,txt0B,txt0C,txt0D,txt0E,txt0F,txt0G,
-			txt1A,txt1B,txt1C,txt1D,txt1E,txt1F,txt1G,
-			txt2A,txt2B,txt2C,txt2D,txt2E,txt2F,txt2G,
-			txt4A,txt4B,txt4C,txt4D,txt4E,txt4F,txt4G,
-			txt5A,txt5B,txt5C,txt5D,txt5E,txt5F,txt5G,
-			txt6A,txt6B,txt6C,txt6D,txt6E,txt6F,txt6G,
-			txt8A,txt8B,txt8C,txt8D,txt8E,txt8F,txt8G,
-			txt9A,txt9B,txt9C,txt9D,txt9E,txt9F,txt9G,
-			txt10A,txt10B,txt10C,txt10D,txt10E,txt10F,txt10G};
 	
 	public BookTicketGUI() {
 		
@@ -784,89 +775,17 @@ public class BookTicketGUI extends JFrame  implements ActionListener {
 			txt10G.setBackground(Color.GREEN);
 			txt10G.setBounds(275, 266, 24, 20);
 			pnlCinemaDisplay.add(txt10G);
+
 			
-		/*	txtBoxes[0] = txt0A;
-			txtBoxes[1] = txt0B;
-			txtBoxes[2] = txt0C;
-			txtBoxes[3] = txt0D;
-			txtBoxes[4] = txt0E;
-			txtBoxes[5] = txt0F;
-			txtBoxes[6] = txt0G;
 			
-			txtBoxes[7] = txt1A;
-			txtBoxes[8] = txt1B;
-			txtBoxes[9] = txt1C;
-			txtBoxes[10] = txt1D;
-			txtBoxes[11] = txt1E;
-			txtBoxes[12] = txt1F;
-			txtBoxes[13] = txt1G;
+			TicketBean ticketBean = new TicketBean();
 			
-			txtBoxes[14] = txt2A;
-			txtBoxes[15] = txt2B;
-			txtBoxes[16] = txt2C;
-			txtBoxes[17] = txt2D;
-			txtBoxes[18] = txt2E;
-			txtBoxes[19] = txt2F;
-			txtBoxes[20] = txt2G;
-			
-			txtBoxes[21] = txt4A;
-			txtBoxes[22] = txt4B;
-			txtBoxes[23] = txt4C;
-			txtBoxes[24] = txt4D;
-			txtBoxes[25] = txt4E;
-			txtBoxes[26] = txt4F;
-			txtBoxes[27] = txt4G;
-			
-			txtBoxes[28] = txt5A;
-			txtBoxes[29] = txt5B;
-			txtBoxes[30] = txt5C;
-			txtBoxes[31] = txt5D;
-			txtBoxes[32] = txt5E;
-			txtBoxes[33] = txt5F;
-			txtBoxes[34] = txt5G;
-			
-			txtBoxes[35] = txt6A;
-			txtBoxes[36] = txt6B;
-			txtBoxes[37] = txt6C;
-			txtBoxes[38] = txt6D;
-			txtBoxes[39] = txt6E;
-			txtBoxes[40] = txt6F;
-			txtBoxes[41] = txt6G;
-			
-			txtBoxes[42] = txt8A;
-			txtBoxes[43] = txt8B;
-			txtBoxes[44] = txt8C;
-			txtBoxes[45] = txt8D;
-			txtBoxes[46] = txt8E;
-			txtBoxes[47] = txt8F;
-			txtBoxes[48] = txt8G;
-			
-			txtBoxes[49] = txt9A;
-			txtBoxes[50] = txt9B;
-			txtBoxes[51] = txt9C;
-			txtBoxes[52] = txt9D;
-			txtBoxes[53] = txt9E;
-			txtBoxes[54] = txt9F;
-			txtBoxes[55] = txt9G;
-			
-			txtBoxes[56] = txt10A;
-			txtBoxes[57] = txt10B;
-			txtBoxes[58] = txt10C;
-			txtBoxes[59] = txt10D;
-			txtBoxes[60] = txt10E;
-			txtBoxes[61] = txt10F;
-			txtBoxes[62] = txt10G;*/
-			
-		/*
-		 * TicketBean ticketBean = new TicketBean();
-		 * 
-		 * for(int i = 0; i < ticketBean.mTickets.size(); i++) { for(int j = 0; j <
-		 * txtBoxes.length; j++) { if(ticketBean.mTickets.get(i).getIsBooked() == 1) {
-		 * String txtName = "txt" + ticketBean.mTickets.get(i).getRowNumber() +
-		 * ticketBean.mTickets.get(i).getColumnLetter();
-		 * if(txtBoxes[j].getName().contains(txtName)) {
-		 * txtBoxes[j].setBackground(Color.RED); } } } }
-		 */
+			for(int i = 0; i < ticketBean.mTickets.size(); i++) { 
+				  if(ticketBean.mTickets.get(i).getIsBooked() == 1) {
+					  String txtName = "txt" + ticketBean.mTickets.get(i).getRowNumber() + ticketBean.mTickets.get(i).getColumnLetter();
+					  bookTicket.BookedSeatTextFieldColor(txtName);
+				  }
+			}
 			
 			
 			fDisplay.add(contentPane);
@@ -879,48 +798,458 @@ public class BookTicketGUI extends JFrame  implements ActionListener {
 		String s = e.getActionCommand();
 		TicketBean ticketBean = new TicketBean();
 
-		/*
-		 * for(int i = 0; i < ticketBean.mTickets.size(); i++) { for(int j = 0; j <
-		 * txtBoxes.length; j++) { if(ticketBean.mTickets.get(i).getIsBooked() == 1) {
-		 * String txtName = "txt" + ticketBean.mTickets.get(i).getRowNumber() +
-		 * ticketBean.mTickets.get(i).getColumnLetter();
-		 * if(txtBoxes[j].getName().contains(txtName)) {
-		 * txtBoxes[j].setBackground(Color.RED); } } } }
-		 */
-		
-		if(s.contains("Book Seat")) {			
+		if(s.contains("Book Seat")) {		
 			Ticket pTicket = new Ticket(txtRowNumber.getText().toString(),txtColLetter.getText().toString(),1);
-			if(ticketBean.createBooking(pTicket)) {
-				for(int j = 0; j < txtBoxes.length; j++) {
-					String txtName = "txt" + txtRowNumber.getText().toString() + txtColLetter.getText().toString();
-					if(txtBoxes[j].getName().contains(txtName)) {
-						txtBoxes[j].setBackground(Color.RED);
+			
+			for(int i = 0; i < ticketBean.mTickets.size(); i++) {
+				if(ticketBean.mTickets.get(i).getRowNumber() == pTicket.getRowNumber() && ticketBean.mTickets.get(i).getColumnLetter() == pTicket.getColumnLetter()) {
+					pTicket.setTicketID(ticketBean.mTickets.get(i).getTicketID());
+				}
+			}
+			
+			if(ticketBean.updateBooking(pTicket)) {
+				String txtName = "txt" + pTicket.getRowNumber() + pTicket.getColumnLetter();				
+				BookedSeatTextFieldColor(txtName);
+				System.out.println("Seat booked successfully: " + txtName);
+			}else {
+				System.out.println("Error with booking seat.");
+			}
+			
+		}else 
+			if(s.contains("Delete Booking")) {
+				Ticket pTicket = new Ticket();
+				
+				for(int i = 0; i < ticketBean.mTickets.size(); i++) {
+					if(ticketBean.mTickets.get(i).getRowNumber() == txtRowNumber.getText().toString() && ticketBean.mTickets.get(i).getColumnLetter() == txtColLetter.getText().toString()) {
+						pTicket.setTicketID(ticketBean.mTickets.get(i).getTicketID());
+						pTicket.setRowNumber(ticketBean.mTickets.get(i).getRowNumber());
+						pTicket.setColumnLetter(ticketBean.mTickets.get(i).getColumnLetter());
+						pTicket.setIsBooked(ticketBean.mTickets.get(i).getIsBooked());
 					}
 				}
-				System.console().readLine("Seat booked successfully.");
-			}else {
-				System.console().readLine("Error with booking seat.");
-			}
-		}else if(s.contains("Delete Booking")) {
-			Ticket pTicket = ticketBean.getBooking(txtRowNumber.getText().toString(),txtColLetter.getText().toString());
-			if(pTicket.getIsBooked() == 1) {
-				if(ticketBean.delete(pTicket.getTicketID())) {
-					for(int j = 0; j < txtBoxes.length; j++) {
-						String txtName = "txt" + txtRowNumber.getText().toString() + txtColLetter.getText().toString();
-						if(txtBoxes[j].getName().contains(txtName)) {
-							txtBoxes[j].setBackground(Color.GREEN);
-						}
+				
+				if(pTicket.getIsBooked() == 1) {
+					
+					if(ticketBean.delete(pTicket.getTicketID())) {
+						String txtName = "txt" + pTicket.getRowNumber() + pTicket.getColumnLetter();					
+						FreeSeatTextFieldColor(txtName);
+						System.out.println("Booking deleted successfully.");
+					}else {
+						System.out.println("Error with deleting booking.");					
 					}
-					System.console().readLine("Booking deleted successfully.");
+					
 				}else {
-					System.console().readLine("Error with deleting booking.");
+					System.out.println("Selected seat was not booked!");
 				}
-			}else {
-				System.console().readLine("Selected seat was not booked!");
-			}
-		}
-		
+			}	
 	}
 
+
+	
+
+	public void BookedSeatTextFieldColor(String txtName) {
+		switch(txtName) {
+		case "txt0A":
+			txt0A.setBackground(Color.RED);
+			break;
+		case "txt0B":
+			txt0B.setBackground(Color.RED);
+			break;
+		case "txt0C":
+			txt0C.setBackground(Color.RED);
+			break;
+		case "txt0D":
+			txt0D.setBackground(Color.RED);
+			break;
+		case "txt0E":
+			txt0E.setBackground(Color.RED);
+			break;
+		case "txt0F":
+			txt0F.setBackground(Color.RED);
+			break;
+		case "txt0G":
+			txt0G.setBackground(Color.RED);
+			break;	
+			
+		case "txt1A":
+			txt1A.setBackground(Color.RED);
+			break;
+		case "txt1B":
+			txt1B.setBackground(Color.RED);
+			break;
+		case "txt1C":
+			txt1C.setBackground(Color.RED);
+			break;
+		case "txt1D":
+			txt1D.setBackground(Color.RED);
+			break;
+		case "txt1E":
+			txt1E.setBackground(Color.RED);
+			break;
+		case "txt1F":
+			txt1F.setBackground(Color.RED);
+			break;
+		case "txt1G":
+			txt1G.setBackground(Color.RED);
+			break;
+			
+		case "txt2A":
+			txt2A.setBackground(Color.RED);
+			break;
+		case "txt2B":
+			txt2B.setBackground(Color.RED);
+			break;
+		case "txt2C":
+			txt2C.setBackground(Color.RED);
+			break;
+		case "txt2D":
+			txt2D.setBackground(Color.RED);
+			break;
+		case "txt2E":
+			txt2E.setBackground(Color.RED);
+			break;
+		case "txt2F":
+			txt2F.setBackground(Color.RED);
+			break;
+		case "txt2G":
+			txt2G.setBackground(Color.RED);
+			break;	
+			
+		case "txt4A":
+			txt4A.setBackground(Color.RED);
+			break;
+		case "txt4B":
+			txt4B.setBackground(Color.RED);
+			break;
+		case "txt4C":
+			txt4C.setBackground(Color.RED);
+			break;
+		case "txt4D":
+			txt4D.setBackground(Color.RED);
+			break;
+		case "txt4E":
+			txt4E.setBackground(Color.RED);
+			break;
+		case "txt4F":
+			txt4F.setBackground(Color.RED);
+			break;
+		case "txt4G":
+			txt4G.setBackground(Color.RED);
+			break;
+			
+		case "txt5A":
+			txt5A.setBackground(Color.RED);
+			break;
+		case "txt5B":
+			txt5B.setBackground(Color.RED);
+			break;
+		case "txt5C":
+			txt5C.setBackground(Color.RED);
+			break;
+		case "txt5D":
+			txt5D.setBackground(Color.RED);
+			break;
+		case "txt5E":
+			txt5E.setBackground(Color.RED);
+			break;
+		case "txt5F":
+			txt5F.setBackground(Color.RED);
+			break;
+		case "txt5G":
+			txt5G.setBackground(Color.RED);
+			break;
+			
+		case "txt6A":
+			txt6A.setBackground(Color.RED);
+			break;
+		case "txt6B":
+			txt6B.setBackground(Color.RED);
+			break;
+		case "txt6C":
+			txt6C.setBackground(Color.RED);
+			break;
+		case "txt6D":
+			txt6D.setBackground(Color.RED);
+			break;
+		case "txt6E":
+			txt6E.setBackground(Color.RED);
+			break;
+		case "txt6F":
+			txt6F.setBackground(Color.RED);
+			break;
+		case "txt6G":
+			txt6G.setBackground(Color.RED);
+			break;	
+			
+		case "txt8A":
+			txt8A.setBackground(Color.RED);
+			break;
+		case "txt8B":
+			txt8B.setBackground(Color.RED);
+			break;
+		case "txt8C":
+			txt8C.setBackground(Color.RED);
+			break;
+		case "txt8D":
+			txt8D.setBackground(Color.RED);
+			break;
+		case "txt8E":
+			txt8E.setBackground(Color.RED);
+			break;
+		case "txt8F":
+			txt8F.setBackground(Color.RED);
+			break;
+		case "txt8G":
+			txt8G.setBackground(Color.RED);
+			break;	
+		
+		case "txt9A":
+			txt9A.setBackground(Color.RED);
+			break;
+		case "txt9B":
+			txt9B.setBackground(Color.RED);
+			break;
+		case "txt9C":
+			txt9C.setBackground(Color.RED);
+			break;
+		case "txt9D":
+			txt9D.setBackground(Color.RED);
+			break;
+		case "txt9E":
+			txt9E.setBackground(Color.RED);
+			break;
+		case "txt9F":
+			txt9F.setBackground(Color.RED);
+			break;
+		case "txt9G":
+			txt9G.setBackground(Color.RED);
+			break;	
+			
+		case "txt10A":
+			txt10A.setBackground(Color.RED);
+			break;
+		case "txt10B":
+			txt10B.setBackground(Color.RED);
+			break;
+		case "txt10C":
+			txt10C.setBackground(Color.RED);
+			break;
+		case "txt10D":
+			txt10D.setBackground(Color.RED);
+			break;
+		case "txt10E":
+			txt10E.setBackground(Color.RED);
+			break;
+		case "txt10F":
+			txt10F.setBackground(Color.RED);
+			break;
+		case "txt10G":
+			txt10G.setBackground(Color.RED);
+			break;	
+		}
+	}
+		
+	
+	public void FreeSeatTextFieldColor(String txtName) {
+			switch(txtName) {
+			case "txt0A":
+				txt0A.setBackground(Color.GREEN);
+				break;
+			case "txt0B":
+				txt0B.setBackground(Color.GREEN);
+				break;
+			case "txt0C":
+				txt0C.setBackground(Color.GREEN);
+				break;
+			case "txt0D":
+				txt0D.setBackground(Color.GREEN);
+				break;
+			case "txt0E":
+				txt0E.setBackground(Color.GREEN);
+				break;
+			case "txt0F":
+				txt0F.setBackground(Color.GREEN);
+				break;
+			case "txt0G":
+				txt0G.setBackground(Color.GREEN);
+				break;	
+				
+			case "txt1A":
+				txt1A.setBackground(Color.GREEN);
+				break;
+			case "txt1B":
+				txt1B.setBackground(Color.GREEN);
+				break;
+			case "txt1C":
+				txt1C.setBackground(Color.GREEN);
+				break;
+			case "txt1D":
+				txt1D.setBackground(Color.GREEN);
+				break;
+			case "txt1E":
+				txt1E.setBackground(Color.GREEN);
+				break;
+			case "txt1F":
+				txt1F.setBackground(Color.GREEN);
+				break;
+			case "txt1G":
+				txt1G.setBackground(Color.GREEN);
+				break;
+				
+			case "txt2A":
+				txt2A.setBackground(Color.GREEN);
+				break;
+			case "txt2B":
+				txt2B.setBackground(Color.GREEN);
+				break;
+			case "txt2C":
+				txt2C.setBackground(Color.GREEN);
+				break;
+			case "txt2D":
+				txt2D.setBackground(Color.GREEN);
+				break;
+			case "txt2E":
+				txt2E.setBackground(Color.GREEN);
+				break;
+			case "txt2F":
+				txt2F.setBackground(Color.GREEN);
+				break;
+			case "txt2G":
+				txt2G.setBackground(Color.GREEN);
+				break;	
+				
+			case "txt4A":
+				txt4A.setBackground(Color.GREEN);
+				break;
+			case "txt4B":
+				txt4B.setBackground(Color.GREEN);
+				break;
+			case "txt4C":
+				txt4C.setBackground(Color.GREEN);
+				break;
+			case "txt4D":
+				txt4D.setBackground(Color.GREEN);
+				break;
+			case "txt4E":
+				txt4E.setBackground(Color.GREEN);
+				break;
+			case "txt4F":
+				txt4F.setBackground(Color.GREEN);
+				break;
+			case "txt4G":
+				txt4G.setBackground(Color.GREEN);
+				break;
+				
+			case "txt5A":
+				txt5A.setBackground(Color.GREEN);
+				break;
+			case "txt5B":
+				txt5B.setBackground(Color.GREEN);
+				break;
+			case "txt5C":
+				txt5C.setBackground(Color.GREEN);
+				break;
+			case "txt5D":
+				txt5D.setBackground(Color.GREEN);
+				break;
+			case "txt5E":
+				txt5E.setBackground(Color.GREEN);
+				break;
+			case "txt5F":
+				txt5F.setBackground(Color.GREEN);
+				break;
+			case "txt5G":
+				txt5G.setBackground(Color.GREEN);
+				break;
+				
+			case "txt6A":
+				txt6A.setBackground(Color.GREEN);
+				break;
+			case "txt6B":
+				txt6B.setBackground(Color.GREEN);
+				break;
+			case "txt6C":
+				txt6C.setBackground(Color.GREEN);
+				break;
+			case "txt6D":
+				txt6D.setBackground(Color.GREEN);
+				break;
+			case "txt6E":
+				txt6E.setBackground(Color.GREEN);
+				break;
+			case "txt6F":
+				txt6F.setBackground(Color.GREEN);
+				break;
+			case "txt6G":
+				txt6G.setBackground(Color.GREEN);
+				break;	
+				
+			case "txt8A":
+				txt8A.setBackground(Color.GREEN);
+				break;
+			case "txt8B":
+				txt8B.setBackground(Color.GREEN);
+				break;
+			case "txt8C":
+				txt8C.setBackground(Color.GREEN);
+				break;
+			case "txt8D":
+				txt8D.setBackground(Color.GREEN);
+				break;
+			case "txt8E":
+				txt8E.setBackground(Color.GREEN);
+				break;
+			case "txt8F":
+				txt8F.setBackground(Color.GREEN);
+				break;
+			case "txt8G":
+				txt8G.setBackground(Color.GREEN);
+				break;	
+			
+			case "txt9A":
+				txt9A.setBackground(Color.GREEN);
+				break;
+			case "txt9B":
+				txt9B.setBackground(Color.GREEN);
+				break;
+			case "txt9C":
+				txt9C.setBackground(Color.GREEN);
+				break;
+			case "txt9D":
+				txt9D.setBackground(Color.GREEN);
+				break;
+			case "txt9E":
+				txt9E.setBackground(Color.GREEN);
+				break;
+			case "txt9F":
+				txt9F.setBackground(Color.GREEN);
+				break;
+			case "txt9G":
+				txt9G.setBackground(Color.GREEN);
+				break;	
+				
+			case "txt10A":
+				txt10A.setBackground(Color.GREEN);
+				break;
+			case "txt10B":
+				txt10B.setBackground(Color.GREEN);
+				break;
+			case "txt10C":
+				txt10C.setBackground(Color.GREEN);
+				break;
+			case "txt10D":
+				txt10D.setBackground(Color.GREEN);
+				break;
+			case "txt10E":
+				txt10E.setBackground(Color.GREEN);
+				break;
+			case "txt10F":
+				txt10F.setBackground(Color.GREEN);
+				break;
+			case "txt10G":
+				txt10G.setBackground(Color.GREEN);
+				break;	
+			}
+		}
 
 }

@@ -55,7 +55,7 @@ public class TicketBean {
 				        ResultSet result = statement.executeQuery(sqlQuery);
 				        
 				        while(result.next()) {
-				        	pTicket = new Ticket(result.getInt(0),String.valueOf(result.getInt(1)),result.getString(2),result.getInt(3));
+				        	pTicket = new Ticket(result.getInt("TicketID"),String.valueOf(result.getInt("RowNumber")),result.getString("ColumnLetter"),result.getInt("isBooked"));
 				        	mTickets.add(pTicket);
 				        }
 				   } catch (SQLException ex) {
@@ -71,7 +71,7 @@ public class TicketBean {
 		   return pTicket;
 	   }
 	   
-	   public Boolean createBooking (Ticket pTicket) {
+	/*   public Boolean createBooking (Ticket pTicket) {
 		      try(Connection con = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS)) {
 		        String sqlQuery = "INSERT INTO ticketdatabase.t_reservation (RowNumber,ColumnLetter,isBooked) VALUES (?,?,?)";
 		       
@@ -90,16 +90,18 @@ public class TicketBean {
 		      }
 		      return false;
 		   }
+	   */
 	   
-	   
-	   public Boolean update (Ticket pTicket) {
+	   public Boolean updateBooking (Ticket pTicket) {
 		      try(Connection con = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS)) {
 		    	  String sqlQuery = "UPDATE ticketdatabase.t_reservation SET RowNumber = ?, ColumnLetter = ?, isBooked = ? WHERE TicketID = ?";
 		    	  
 		    	  PreparedStatement statement = con.prepareStatement(sqlQuery);
-		    	  statement.setString(1, pTicket.getRowNumber());
+		    	  
+		    	  statement.setInt(1, Integer.parseInt(pTicket.getRowNumber()));
 		    	  statement.setString(2, pTicket.getColumnLetter());
 		    	  statement.setInt(3, pTicket.getIsBooked());
+		    	  statement.setInt(4, pTicket.getTicketID());
 		    	  
 		    	  int rowsInserted = statement.executeUpdate();
 			        if(rowsInserted > 0) {
