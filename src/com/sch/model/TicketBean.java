@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
+
 /**
  * @author Temwani
  *
@@ -37,6 +39,13 @@ public class TicketBean {
 			        	Ticket pTicket = new Ticket(result.getInt("TicketID"),String.valueOf(result.getInt("RowNumber")),result.getString("ColumnLetter"),result.getInt("isBooked"));
 			        	mTickets.add(pTicket);
 			        }
+		/*   try {
+			   	  rowSet = RowSetProvider.newFactory().createJdbcRowSet();
+		          rowSet.setUrl(DB_URL);
+		          rowSet.setUsername(DB_USER);
+		          rowSet.setPassword(DB_PASS);
+		          rowSet.setCommand("SELECT * FROM ticketdatabase.t_reservation");
+		          rowSet.execute();*/
 			   } catch (SQLException ex) {
 			         
 			         ex.printStackTrace();
@@ -63,22 +72,22 @@ public class TicketBean {
 				         ex.printStackTrace();
 				      } 
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
- 
-		   
+	   
 		   return pTicket;
 	   }
 	   
-	/*   public Boolean createBooking (Ticket pTicket) {
+	   
+	   public Boolean createBooking (int RowNumber, String ColLetter, int isBoooked) {	      
 		      try(Connection con = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS)) {
 		        String sqlQuery = "INSERT INTO ticketdatabase.t_reservation (RowNumber,ColumnLetter,isBooked) VALUES (?,?,?)";
 		       
 		        PreparedStatement statement = con.prepareStatement(sqlQuery);
-		        statement.setInt(1, Integer.parseInt(pTicket.getRowNumber()));
-		        statement.setString(2, pTicket.getColumnLetter());
-		        statement.setInt(3, pTicket.getIsBooked());
+		       // statement.setInt(1, IDcount);
+		        statement.setInt(1, RowNumber);
+		        statement.setString(2, ColLetter);
+		        statement.setInt(3, isBoooked);
 		        
 		        int rowsInserted = statement.executeUpdate();
 		        if(rowsInserted > 0) {
@@ -90,9 +99,10 @@ public class TicketBean {
 		      }
 		      return false;
 		   }
-	   */
 	   
-	   public Boolean updateBooking (Ticket pTicket) {
+	   
+	   
+	/*   public Boolean updateBooking (Ticket pTicket) {
 		      try(Connection con = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS)) {
 		    	  String sqlQuery = "UPDATE ticketdatabase.t_reservation SET RowNumber = ?, ColumnLetter = ?, isBooked = ? WHERE TicketID = ?";
 		    	  
@@ -113,13 +123,14 @@ public class TicketBean {
 			      }
 			      return false;
 		   }	
+	   */
 	   
 	   public Boolean delete(int pTicketID) {
 		      try(Connection con = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS)) {
 		    	  String sqlQuery = "DELETE FROM ticketdatabase.t_reservation WHERE TicketID = ?";
 		    	  
 		    	  PreparedStatement statement = con.prepareStatement(sqlQuery);
-		    	  statement.setInt(3, pTicketID);
+		    	  statement.setInt(1, pTicketID);
 		    	  
 		    	  int rowsInserted = statement.executeUpdate();
 			        if(rowsInserted > 0) {
